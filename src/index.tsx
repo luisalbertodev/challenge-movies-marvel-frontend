@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import 'normalize.css';
+import 'aos/dist/aos.css';
+import 'antd/dist/antd.css';
+
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
+
 import App from './App';
+import ThemeProvider from './theme/theme';
+import GlobalStyled from './theme/globalStyle';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+render(
+  <StrictMode>
+    <GlobalStyled />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </StrictMode>,
   document.getElementById('root')
 );
 

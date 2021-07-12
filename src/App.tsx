@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+import { useEffect, Suspense, lazy, FC } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
+// was added component loading page with component Suspend for Lazy loading
+import Loader from 'components/Loader';
+
+// was added lazy loading to page
+const Main = lazy(() => import('pages/Main'));
+const Favorites = lazy(() => import('pages/Favorites'));
+
+interface Props {}
+
+const App: FC<Props> = () => {
+  useEffect(() => AOS.init(), []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/favoritos">
+            <Favorites />
+          </Route>
+        </Switch>
+      </Suspense>
+    </Router>
   );
-}
+};
 
 export default App;
