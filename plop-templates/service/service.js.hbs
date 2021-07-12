@@ -1,0 +1,36 @@
+import { createContext, useContext } from 'react';
+
+const {{pascalCase name}}Context = createContext(null);
+
+
+export const {{pascalCase name}}Provider = (props) => {
+   const value = {
+    getExamplePrivateVariable: props.getExamplePrivateVariable || getExamplePrivateVariable,
+    setExamplePrivateVariable: props.setExamplePrivateVariable || setExamplePrivateVariable,
+  };
+
+
+  return (
+    <{{pascalCase name}}.Provider value={value}>
+      {props.children}
+    <{{pascalCase name}}.Provider/>
+  );
+};
+
+export const use{{pascalCase name}} = () => {
+  const context = useContext({{pascalCase name}}Context);
+
+  if (!context) {
+    throw new Error('{{pascalCase name}}Context must be used within a {{pascalCase name}}Provider');
+  }
+
+  return context;
+};
+
+const getExamplePrivateVariable = (body) => {
+  // ...
+};
+
+const setExamplePrivateVariable = (body) => {
+  // ...
+};
